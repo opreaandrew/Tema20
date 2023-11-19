@@ -27,27 +27,27 @@ public class TransactionService {
                 .toList();
     }
 
-    public Transaction getTransactionById(long id){
+    public Transaction getTransactionById(long id) {
         return transactions.stream()
                 .filter(filter -> filter.id() == id)
                 .findFirst()
-                .orElseThrow(()-> new RuntimeException("No transaction with that ID"));
+                .orElseThrow(() -> new RuntimeException("No transaction with that ID"));
     }
 
-    public Transaction addTransaction(Transaction trans){
-        Transaction newTransaction = trans.withId(currentId+1);
+    public Transaction addTransaction(Transaction trans) {
+        Transaction newTransaction = trans.withId(currentId + 1);
         transactions.add(newTransaction);
         return newTransaction;
     }
 
-    public Transaction replaceTransaction(int id, Transaction toAdd){
+    public Transaction replaceTransaction(int id, Transaction toAdd) {
         deleteTransaction(id);
         Transaction newTransaction = toAdd.withId(id);
         transactions.add(newTransaction);
         return newTransaction;
     }
 
-    public Transaction deleteTransaction(int id){
+    public Transaction deleteTransaction(int id) {
         Transaction oldTransaction = getTransactionById(id);
         transactions.remove(oldTransaction);
         return oldTransaction;
